@@ -24,7 +24,7 @@ dpid.Dpid(clip clip[, int width=128, int height=128, float lambda=1.0])
     The input clip, must be of RGB color family and 8 bit integer.
 
 - width & height:
-    The width and height of output clip. One of them can be 0, and the downscaling will keep the aspect ratio.
+    The width and height of output clip.
 
 - lambda:
     Power factor of range kernel. It can be used to tune the amplification of the weights of pixels that represent detail—from a box filter over an emphasis of distinct pixels towards a selection of only the most distinct pixels.
