@@ -1,5 +1,6 @@
 # VapourSynth-dpid
 Copyright© 2017 WolframRhodium
+
 Rapid, Detail-Preserving Image Downscaler for VapourSynth
 ## Description
 [dpid](http://www.gcc.tu-darmstadt.de/home/proj/dpid/) is an algorithm which preserves visually important details in downscaled images and is especially suited for large downscaling factors.
