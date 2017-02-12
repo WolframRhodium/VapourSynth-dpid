@@ -8,7 +8,7 @@ Rapid, Detail-Preserving Image Downscaler for VapourSynth
 It acts like a convolutional filters where input pixels contribute more to the output image the more their color deviates from their local neighborhood, which preserves visually important details.
 
 ## Requirements
-CUDA (and NVIDA GPU with at least Kepler Architecture to enable compute capabilities 3.5)
+CUDA (and NVIDA GPU with at least Kepler Architecture to enable compute capabilities 3.0)
 
 ## Supported Formats
 
