@@ -27,7 +27,7 @@ dpid.Dpid(clip clip[, int width=0, int height=0, float lambda=1.0])
     The width and height of output clip. One of which can be 0, and the downscaling will keep the aspect ratio.
 
 - lambda: (Default: 1.0)
-    Power factor of range kernel. It can be used to tune the amplification of the weights of pixels that represent detail—from a box filter over an emphasis of distinct pixels towards a selection of only the most distinct pixels. This parameter happens to be a python keyword, so you may need to refer to the (doc)[http://www.vapoursynth.com/doc/pythonreference.html#python-keywords-as-filter-arguments].
+    Power factor of range kernel. It can be used to tune the amplification of the weights of pixels that represent detail—from a box filter over an emphasis of distinct pixels towards a selection of only the most distinct pixels. This parameter happens to be a python keyword, so you may need to refer to the [doc](http://www.vapoursynth.com/doc/pythonreference.html#python-keywords-as-filter-arguments).
 
 ## Benchmark
 
