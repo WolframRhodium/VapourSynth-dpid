@@ -17,36 +17,24 @@ sample type & bps: RGB 8 bit integer
 ## Usage
 
 ```python
-dpid.Dpid(clip clip[, int width=128, int height=128, float lambda=1.0])
+dpid.Dpid(clip clip[, int width=0, int height=0, float lambda=1.0])
 ```
 
 - input:
     The input clip, must be of RGB color family and 8 bit integer.
 
-- width & height:
-    The width and height of output clip.
+- width & height: (Default: 0)
+    The width and height of output clip. One of which can be 0, and the downscaling will keep the aspect ratio.
 
-- lambda:
-    Power factor of range kernel. It can be used to tune the amplification of the weights of pixels that represent detail—from a box filter over an emphasis of distinct pixels towards a selection of only the most distinct pixels.
+- lambda: (Default: 1.0)
+    Power factor of range kernel. It can be used to tune the amplification of the weights of pixels that represent detail—from a box filter over an emphasis of distinct pixels towards a selection of only the most distinct pixels. This parameter happens to be a python keyword, so you may need to refer to the (doc)[http://www.vapoursynth.com/doc/pythonreference.html#python-keywords-as-filter-arguments].
 
 ## Benchmark
 
 Configuration: Intel Core i7-6700HQ, NVIDIA Geforce GTX 960M, 16GB DDR4-2133 MHz, Windows 10 64bit
 
-Testing 512 frames from 1920x1080 to 1280x720, lambda=0.0...
-Output 512 frames in 28.74 seconds (17.81 fps)
-
-Testing 512 frames from 1920x1080 to 1280x720, lambda=0.5...
-Output 512 frames in 27.98 seconds (18.30 fps)
-
 Testing 512 frames from 1920x1080 to 1280x720, lambda=1.0...
 Output 512 frames in 28.03 seconds (18.27 fps)
-
-Testing 512 frames from 1920x1080 to 400x225, lambda=0.0...
-Output 512 frames in 9.43 seconds (54.32 fps)
-
-Testing 512 frames from 1920x1080 to 400x225, lambda=0.5...
-Output 512 frames in 9.42 seconds (54.36 fps)
 
 Testing 512 frames from 1920x1080 to 400x225, lambda=1.0...
 Output 512 frames in 9.54 seconds (53.68 fps)
