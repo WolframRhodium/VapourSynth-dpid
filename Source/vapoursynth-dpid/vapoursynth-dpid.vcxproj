@@ -97,7 +97,8 @@
     <ClCompile Include="..\dpid.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <CudaCompile Include="..\kernel.cu" />
+    <CudaCompile Include="..\kernel16.cu" />
+    <CudaCompile Include="..\kernel8.cu" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

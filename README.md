@@ -8,11 +8,11 @@ Rapid, Detail-Preserving Image Downscaler for VapourSynth
 It acts like a convolutional filters where input pixels contribute more to the output image the more their color deviates from their local neighborhood, which preserves visually important details.
 
 ## Requirements
-CUDA (and NVIDA GPU with at least Kepler Architecture to enable compute capabilities 3.0)
+CUDA-Enabled GPU
 
 ## Supported Formats
 
-sample type & bps: RGB 8 bit integer
+sample type & bps: RGB 8-16 bit integer
 
 ## Usage
 
@@ -21,7 +21,7 @@ dpid.Dpid(clip clip[, int width=0, int height=0, float lambda=1.0])
 ```
 
 - input:
-    The input clip, must be of RGB color family and 8 bit integer.
+    The input clip, must be of RGB color family and integer sample type.
 
 - width & height: (Default: 0)
     The width and height of output clip. One of which can be 0, and the downscaling will keep the aspect ratio.

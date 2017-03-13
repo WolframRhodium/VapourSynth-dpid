@@ -20,6 +20,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <CudaCompile Include="..\kernel.cu" />
+    <CudaCompile Include="..\kernel8.cu" />
+    <CudaCompile Include="..\kernel16.cu" />
   </ItemGroup>
 </Project>
