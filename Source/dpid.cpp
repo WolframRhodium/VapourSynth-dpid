@@ -2,8 +2,9 @@
 #include <cmath>
 #include <string>
 
-#include <vapoursynth\VapourSynth.h>
-#include <vapoursynth\VSHelper.h>
+#include "vapoursynth\VapourSynth.h"
+#include "vapoursynth\VSHelper.h"
+#include "dpid.h"
 
 struct DpidData {
 	VSNodeRef * node;
@@ -13,13 +14,8 @@ struct DpidData {
 	uint16_t * src16Interleaved, *dst16Interleaved;
 };
 
-struct Params {
-	uint32_t oWidth, oHeight, iWidth, iHeight, pixel_max;
-	float pWidth, pHeight, lambda;
-};
-
-void run8(Params& i, const void* hInput, void* hOutput);
-void run16(Params& i, const void* hInput, void* hOutput);
+extern void run8(Params& i, const void* hInput, void* hOutput);
+extern void run16(Params& i, const void* hInput, void* hOutput);
 
 static void process8(const VSFrameRef * src, VSFrameRef * dst, DpidData * d, const VSAPI * vsapi)
 {
@@ -39,8 +35,8 @@ static void process8(const VSFrameRef * src, VSFrameRef * dst, DpidData * d, con
 	args.iHeight = height;
 	args.oWidth = d->vi.width;
 	args.oHeight = d->vi.height;
-	//args.pWidth = args.iWidth / (float)args.oWidth;
-	//args.pHeight = args.iHeight / (float)args.oHeight; // This args broke when the struct "Params" contained "pixel_max".
+	args.pWidth = args.iWidth / (float)args.oWidth;
+	args.pHeight = args.iHeight / (float)args.oHeight;
 	args.lambda = d->lambda;
 	args.pixel_max = (1 << d->vi.format->bitsPerSample) - 1;
 
@@ -95,8 +91,8 @@ static void process16(const VSFrameRef * src, VSFrameRef * dst, DpidData * d, co
 	args.iHeight = height;
 	args.oWidth = d->vi.width;
 	args.oHeight = d->vi.height;
-	//args.pWidth = args.iWidth / (float)args.oWidth;
-	//args.pHeight = args.iHeight / (float)args.oHeight;  // This args broke when the struct "Params" contained "pixel_max".
+	args.pWidth = args.iWidth / (float)args.oWidth;
+	args.pHeight = args.iHeight / (float)args.oHeight;
 	args.lambda = d->lambda;
 	args.pixel_max = (1 << d->vi.format->bitsPerSample) - 1;
 

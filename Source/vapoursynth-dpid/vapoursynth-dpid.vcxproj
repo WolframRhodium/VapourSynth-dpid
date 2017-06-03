@@ -100,6 +100,9 @@
     <CudaCompile Include="..\kernel16.cu" />
     <CudaCompile Include="..\kernel8.cu" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\dpid.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
     <Import Project="$(VCTargetsPath)\BuildCustomizations\CUDA 8.0.targets" />

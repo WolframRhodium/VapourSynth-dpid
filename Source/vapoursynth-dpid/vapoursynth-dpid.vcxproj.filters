@@ -23,4 +23,9 @@
     <CudaCompile Include="..\kernel8.cu" />
     <CudaCompile Include="..\kernel16.cu" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\dpid.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
 </Project>

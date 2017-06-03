@@ -297,9 +297,6 @@ void run8(Params& i, const void* hInput, void* hOutput)
 	check(cudaMalloc(&dOutput, sOutput));
 	check(cudaMalloc(&dGuidance, sGuidance));
 
-	i.pHeight = i.iHeight / (float)i.oHeight;
-	i.pWidth = i.iWidth / (float)i.oWidth;
-
 	// copy data
 	check(cudaMemcpy(dInput, hInput, sInput, cudaMemcpyHostToDevice));
 
