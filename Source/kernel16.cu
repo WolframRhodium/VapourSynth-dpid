@@ -9,6 +9,7 @@
 #include <cuda_runtime_api.h>
 #include <vector_types.h>
 #include <vector_functions.h>
+#include "dpid.h"
 
 #define THREADS 128
 #define WSIZE 32
@@ -20,14 +21,6 @@
 
 #define WTHREAD	(TX % WSIZE)
 #define WARP	(TX / WSIZE)
-
-//-------------------------------------------------------------------
-// SHARED
-//-------------------------------------------------------------------
-struct Params {
-	uint32_t oWidth, oHeight, iWidth, iHeight, pixel_max;
-	float pWidth, pHeight, lambda;
-};
 
 //-------------------------------------------------------------------
 // DEVICE
