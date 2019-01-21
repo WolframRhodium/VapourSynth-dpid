@@ -7,6 +7,8 @@ Rapid, Detail-Preserving Image Downscaler for VapourSynth
 
 It acts like a convolutional filters where input pixels contribute more to the output image the more their color deviates from their local neighborhood, which preserves visually important details.
 
+**[CuPy version](https://github.com/WolframRhodium/muvsfunc/blob/master/Collections/examples/Dpid_cupy/dpid_cupy.vpy) (with additional  floating point support)**
+
 ## Requirements
 CUDA-Enabled GPU
 
