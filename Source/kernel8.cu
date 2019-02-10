@@ -108,10 +108,19 @@ __device__ __forceinline__ float contribution(const Local& l, float f, const uin
 __device__ __forceinline__ float4 __shfl_down(const float4 var, const uint32_t srcLane, const uint32_t width = 32)
 {
 	float4 output;
-	output.x = __shfl_down(var.x, srcLane, width);
-	output.y = __shfl_down(var.y, srcLane, width);
-	output.z = __shfl_down(var.z, srcLane, width);
-	output.w = __shfl_down(var.w, srcLane, width);
+
+#if __CUDACC_VER_MAJOR__ >= 9 // CUDA 9.0 or later
+    output.x = __shfl_down_sync(0xFFFFFFFF, var.x, srcLane, width);
+    output.y = __shfl_down_sync(0xFFFFFFFF, var.y, srcLane, width);
+    output.z = __shfl_down_sync(0xFFFFFFFF, var.z, srcLane, width);
+    output.w = __shfl_down_sync(0xFFFFFFFF, var.w, srcLane, width);
+#else
+    output.x = __shfl_down(var.x, srcLane, width);
+    output.y = __shfl_down(var.y, srcLane, width);
+    output.z = __shfl_down(var.z, srcLane, width);
+    output.w = __shfl_down(var.w, srcLane, width);
+#endif
+
 	return output;
 }
 
@@ -132,7 +141,7 @@ __device__ __forceinline__ float distance(const float4& avg, const uchar3& color
 	const float y = avg.y - color.y;
 	const float z = avg.z - color.z;
 
-	return sqrt(x * x + y * y + z * z) / 441.6729559f; // L2-Norm / sqrt(255^2 * 3) // L2-Norm / sqrt(pixel_max^2 * 3)
+	return sqrtf(x * x + y * y + z * z) / 441.6729559f; // L2-Norm / sqrt(255^2 * 3) // L2-Norm / sqrt(pixel_max^2 * 3)
 }
 
 //-------------------------------------------------------------------
