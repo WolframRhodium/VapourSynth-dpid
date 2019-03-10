@@ -2,8 +2,8 @@
 #include <cmath>
 #include <string>
 
-#include "vapoursynth\VapourSynth.h"
-#include "vapoursynth\VSHelper.h"
+#include "vapoursynth/VapourSynth.h"
+#include "vapoursynth/VSHelper.h"
 #include "dpid.h"
 
 struct DpidData {
