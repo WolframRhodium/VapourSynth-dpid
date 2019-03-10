@@ -9,7 +9,7 @@ PREFIX ?= /usr/local/lib/vapoursynth
 
 $(TARGET): dpid.o kernel8.o kernel16.o
 	@echo "Linking target..."
-	@nvcc -shared -m64 $(CUFLAGS) $(addprefix -l,$(LIBS)) $(addprefix -L,$(LIBDIRS)) dpid.o kernel8.o kernel16.o -o libdpid.so
+	@nvcc -shared -m64 $(CUFLAGS) $(addprefix -l,$(LIBS)) $(addprefix -L,$(LIBDIRS)) dpid.o kernel8.o kernel16.o -o $(TARGET)
 
 dpid.o: dpid.cpp dpid.h
 	@echo "Compiling dpid.cpp ..."
