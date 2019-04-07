@@ -25,8 +25,7 @@ kernel16.o: kernel16.cu
 
 install: $(TARGET)
 	@echo "Installing..."
-	@cp $(TARGET) $(PREFIX)
-	@chmod 644 $(PREFIX)/$(TARGET)
+	@install -Dm644 $(TARGET) $(PREFIX)/$(TARGET)
 
 uninstall:
 	@echo "Uninstalling..."
