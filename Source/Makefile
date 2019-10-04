@@ -3,8 +3,8 @@ CFLAGS = -O2 --std=c++17 -Wall -Werror -Wextra -Wno-unused-parameter -fPIC
 TARGET ?= libdpid.so
 PREFIX ?= /usr/local/lib/vapoursynth
 
-$(TARGET): dpid.cpp
-	@echo "Compiling dpid.cpp ..."
+$(TARGET): Source.cpp
+	@echo "Compiling Source.cpp ..."
 	@$(CXX) $(CFLAGS) -shared -m64 -c $(addprefix -I,$(INCLUDE)) $< -o libdpid.so
 
 install: $(TARGET)
