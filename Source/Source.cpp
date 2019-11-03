@@ -104,17 +104,6 @@ static const VSFrameRef *VS_CC dpidGetframe(int n, int activationReason, void **
         const VSFrameRef *src2 = vsapi->getFrameFilter(n, d->node2, frameCtx);
         const VSFormat *fi = vsapi->getFrameFormat(src2);
 
-        int chromaLocation;
-
-        if (d->read_chromaloc) {
-            int err;
-
-            chromaLocation = int64ToIntS(vsapi->propGetInt(vsapi->getFramePropsRO(src2), "_ChromaLocation", 0, &err));
-            if (err) {
-                chromaLocation = 0;
-            }
-        }
-
         const VSFrameRef * fr[] = {
             d->process[0] ? nullptr : src2, 
             d->process[1] ? nullptr : src2, 
@@ -140,10 +129,18 @@ static const VSFrameRef *VS_CC dpidGetframe(int n, int activationReason, void **
                 const int dst_h = vsapi->getFrameHeight(src2, plane);
 
                 float src_left, src_top;
-                if (plane == 0 || !d->read_chromaloc) {
-                    src_left = d->src_left[plane];
-                    src_top = d->src_top[plane];
-                } else { 
+                if (plane != 0 && d->read_chromaloc) { 
+                    int chromaLocation;
+
+                    {
+                        int err;
+
+                        chromaLocation = int64ToIntS(vsapi->propGetInt(vsapi->getFramePropsRO(src2), "_ChromaLocation", 0, &err));
+                        if (err) {
+                            chromaLocation = 0;
+                        }
+                    }
+
                     const float hSubS = static_cast<float>(1 << fi->subSamplingW);
                     const float hCPlace = (chromaLocation == 0 || chromaLocation == 2 || chromaLocation == 4) 
                         ? (0.5f - hSubS / 2) : 0.f;
@@ -156,6 +153,9 @@ static const VSFrameRef *VS_CC dpidGetframe(int n, int activationReason, void **
 
                     src_left = ((d->src_left[plane] - hCPlace) * hScale + hCPlace) / hScale / hSubS;
                     src_top = ((d->src_top[plane] - vCPlace) * vScale + vCPlace) / vScale / vSubS;
+                } else {
+                    src_left = d->src_left[plane];
+                    src_top = d->src_top[plane];
                 }
 
                 // process
