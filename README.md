@@ -22,7 +22,7 @@ dpid.Dpid(clip clip[, int width=0, int height=0, float lambda=1.0, float[] src_l
 ```
 
 - clip:
-    The input clip, must be of RGB color family and integer sample type.
+    The input clip.
 
 - width & height: (Default: clip.width / clip.height)
     The width and height of the output clip. One of which can be 0, and the downscaling will keep the aspect ratio.
