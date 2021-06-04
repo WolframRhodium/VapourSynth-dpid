@@ -9,11 +9,11 @@ Rapid, Detail-Preserving Image Downscaler for VapourSynth
 
 It acts like a convolutional filter where input pixels contribute more to the output image the more their color deviates from their local neighborhood, which preserves visually important details.
 
-__[CuPy version](https://github.com/WolframRhodium/muvsfunc/blob/master/Collections/examples/Dpid_cupy/dpid_cupy.vpy) (with additional  floating point support)__
+__[CuPy version](https://github.com/WolframRhodium/muvsfunc/blob/master/Collections/examples/Dpid_cupy/dpid_cupy.vpy)__
 
 ## Supported Formats
 
-sample type & bps: RGB/YUV/GRAY 8-16 bit integer
+sample type & bps: RGB/YUV/GRAY 8-16 bit integer or floating point.
 
 ## Usage
 
