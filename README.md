@@ -20,14 +20,17 @@ dpid.Dpid(clip clip[, int width=0, int height=0, float lambda=1.0, float[] src_l
 ```
 
 - clip:
+
     The input clip.
 
 - width & height: (Default: clip.width / clip.height)
+
     The width and height of the output clip. 
 
     One of which can be 0, and the downscaling will keep the aspect ratio.
 
 - lambda: (Default: 1.0)
+
     The power factor of range kernel. 
 
     It can be used to tune the amplification of the weights of pixels that represent detail—from a box filter over an emphasis of distinct pixels towards a selection of only the most distinct pixels. 
@@ -35,6 +38,7 @@ dpid.Dpid(clip clip[, int width=0, int height=0, float lambda=1.0, float[] src_l
     This parameter happens to be a python keyword, so you may need to refer to the [doc](http://www.vapoursynth.com/doc/pythonreference.html#python-keywords-as-filter-arguments).
 
 - src_left, src_top: (Default: 0)
+
     Used to select the source region of the input to use. 
 
     They can be arrays to specify different shifting for each plane.
@@ -56,6 +60,7 @@ dpid.Dpid(clip clip[, int width=0, int height=0, float lambda=1.0, float[] src_l
     ```
 
 - read_chromaloc: (Default: True)
+
     Whether to read `_ChromaLocation` property.
 
 ---
@@ -68,22 +73,27 @@ dpid.DpidRaw(clip clip[, clip clip2, float lambda=1.0, float[] src_left=0, float
     (Same as `dpid.Dpid()`)
 
 - clip2:
+
     User-defined downsampled clip. 
 
     Should be of the same format and number of frames as `clip`.
 
 - lambda: (Default: 1.0)
+
     (Same as `dpid.Dpid()`)
 
 - src_left, src_top: (Default: 0)
+
     Used to select the source region of the input to use. 
 
     It can also be used to shift the image.
 
 - read_chromaloc: (Default: True)
+
     (Same as `dpid.Dpid()`)
 
 - planes: (Default: [0, 1, 2])
+
     Sets which planes will be processed. 
 
     Any unprocessed planes will be simply copied from `clip2`.
