@@ -41,7 +41,7 @@ dpid.Dpid(clip clip[, int width=0, int height=0, float lambda=1.0, float[] src_l
 
     Used to select the source region of the input to use. 
 
-    They can be arrays to specify different shifting for each plane.
+    They can be arrays to specify different shifting for each plane. The last value is used for the unspecified planes.
 
     Only the first value in the array is passed to `resize.Bilinear()`, i.e.
 
