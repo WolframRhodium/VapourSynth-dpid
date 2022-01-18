@@ -1,0 +1,53 @@
+name: Build for Windows
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        platform: [ windows-latest ]
+        arch: [ x64 ]
+    runs-on: ${{ matrix.platform }}
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: 'recursive'
+
+    - name: Setup Python
+      uses: actions/setup-python@v1
+      with:
+        python-version: '3.x'
+
+    - name: install meson and ninja
+      run: pip install meson ninja
+
+    - name: download VS headers and patch header location
+      shell: bash
+      run: |
+        git clone https://github.com/vapoursynth/vapoursynth --depth=1
+        mkdir Source/vapoursynth
+        cp vapoursynth/include/*.h Source/vapoursynth
+
+    - name: setup MS dev commands
+      uses: ilammy/msvc-dev-cmd@v1
+      with:
+        arch: ${{ matrix.arch }}
+
+    - name: Meson setup
+      run: meson setup builddir/ -Db_vscrt=mt
+      env:
+        CXX: clang-cl
+        CXXFLAGS: -mavx -mfma -Xclang -ffast-math
+      working-directory: Source
+
+    - name: Meson compile
+      run: meson compile -C builddir/ -v
+      working-directory: Source
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: release-${{matrix.arch}}
+        path: Source/builddir/*.dll
+
