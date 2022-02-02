@@ -17,9 +17,9 @@ if build_machine.system() == 'windows'
   deps = []
   install_dir = 'installed'  # dummy
 else
-  vapoursynth_deps = [dependency('vapoursynth').partial_dependency(compile_args: true, includes: true)]
+  vapoursynth_dep = dependency('vapoursynth').partial_dependency(compile_args: true, includes: true)
   deps = [vapoursynth_deps]
-  install_dir = join_paths(vapoursynth_deps.get_pkgconfig_variable('libdir'), 'vapoursynth')
+  install_dir = join_paths(vapoursynth_dep.get_pkgconfig_variable('libdir'), 'vapoursynth')
 endif
 
 shared_module('dpid', sources,
