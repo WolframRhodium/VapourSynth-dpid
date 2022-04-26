@@ -46,7 +46,7 @@ dpid.Dpid(clip clip[, int width=0, int height=0, float lambda=1.0, float[] src_l
     Only the first value in the array is passed to `resize.Bilinear()`, i.e.
 
     ```Python3
-    clip = core.dpid.Dpid(src, width, height, _lambda, src_lefts, src_tops)
+    clip = core.dpid.Dpid(src, width, height, lambda_, src_lefts, src_tops)
     ```
 
     is equivalent to
@@ -56,7 +56,7 @@ dpid.Dpid(clip clip[, int width=0, int height=0, float lambda=1.0, float[] src_l
         src, width, height, 
         src_left=src_lefts[0], src_top=src_tops[0])
 
-    clip = core.dpid.DpidRaw(src, down, _lambda, src_lefts, src_tops)
+    clip = core.dpid.DpidRaw(src, down, lambda_, src_lefts, src_tops)
     ```
 
 - read_chromaloc: (Default: True)
