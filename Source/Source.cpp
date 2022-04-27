@@ -395,22 +395,15 @@ static void VS_CC dpidCreate(const VSMap *in, VSMap *out, void *userData, VSCore
             vsapi->freeMap(vtmp2);
             return;
         }
+        vsapi->freeMap(vtmp1);
 
-        vsapi->clearMap(vtmp1);
         node = vsapi->propGetNode(vtmp2, "clip", 0, nullptr);
-        vsapi->clearMap(vtmp2);
 
         d->node2 = node;
-        vsapi->createFilter(vtmp1, vtmp2, "Dpid", dpidNodeInit, dpidGetframe, dpidNodeFree,
+        vsapi->createFilter(vtmp2, out, "Dpid", dpidNodeInit, dpidGetframe, dpidNodeFree,
             fmParallel, nfNoCache, d.release(), core);
 
-        vsapi->freeMap(vtmp1);
-        node = vsapi->propGetNode(vtmp2, "clip", 0, nullptr);
         vsapi->freeMap(vtmp2);
-
-        vsapi->propSetNode(out, "clip", node, paReplace);
-        vsapi->freeNode(node);
-
     } catch (const std::string &error) {
         vsapi->setError(out, ("Dpid: " + error).c_str());
         vsapi->freeNode(node);
