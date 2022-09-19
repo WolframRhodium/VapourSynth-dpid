@@ -331,6 +331,13 @@ static void VS_CC dpidCreate(const VSMap *in, VSMap *out, void *userData, VSCore
             d->dst_h = vi->height;
         }
 
+        if (d->dst_w == 0 && d->dst_h == 0)
+            throw std::string{"\"width\" and \"height\" can not be equal to 0 at the same time"};
+        else if (d->dst_w == 0)
+            d->dst_w = vi->width * d->dst_h / vi->height;
+        else if (d->dst_h == 0)
+            d->dst_h = vi->height * d->dst_w / vi->width;
+
         if (d->dst_w == vi->width && d->dst_h == vi->height) 
             throw std::string{"dimensions of output is identical to input. "
                 "Please consider remove the function call"};
