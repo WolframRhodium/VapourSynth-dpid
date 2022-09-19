@@ -1,23 +1,24 @@
 name: Build for Windows
 
-on: [push, pull_request]
+on:
+  push:
+    paths:
+      - 'Source/*'
+      - '.github/workflows/build.yaml'
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'which tag to upload to'
+        default: ''
 
 jobs:
   build:
-    strategy:
-      matrix:
-        platform: [ windows-latest ]
-        arch: [ x64 ]
-    runs-on: ${{ matrix.platform }}
+    runs-on: windows-2022
+
     steps:
     - uses: actions/checkout@v2
       with:
         submodules: 'recursive'
-
-    - name: Setup Python
-      uses: actions/setup-python@v1
-      with:
-        python-version: '3.x'
 
     - name: install meson and ninja
       run: pip install meson ninja
@@ -31,8 +32,6 @@ jobs:
 
     - name: setup MS dev commands
       uses: ilammy/msvc-dev-cmd@v1
-      with:
-        arch: ${{ matrix.arch }}
 
     - name: Meson setup
       run: meson setup builddir/ -Db_vscrt=mt
@@ -48,6 +47,15 @@ jobs:
     - name: Upload artifact
       uses: actions/upload-artifact@v2
       with:
-        name: release-${{matrix.arch}}
+        name: release-windows-x64
         path: Source/builddir/*.dll
 
+    - name: Release
+      uses: softprops/action-gh-release@v1
+      if: github.event_name == 'workflow_dispatch' && github.event.inputs.tag != ''
+      with:
+        tag_name: ${{ github.event.inputs.tag }}
+        files: Source/builddir/dpid.dll
+        fail_on_unmatched_files: true
+        generate_release_notes: false
+        prerelease: true
